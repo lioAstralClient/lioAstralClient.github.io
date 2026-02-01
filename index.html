@@ -31,59 +31,43 @@
         .nav-links a { text-decoration: none; color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 600; margin-left: 20px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
         
-        .auth-btn { 
-            background: var(--accent); color: black !important; padding: 10px 22px; 
-            border-radius: 6px; font-weight: 800; cursor: pointer; border: none; font-size: 12px;
-        }
+        .auth-btn { background: var(--accent); color: black !important; padding: 10px 22px; border-radius: 6px; font-weight: 800; cursor: pointer; border: none; font-size: 12px; }
 
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero h1 { font-size: clamp(50px, 8vw, 100px); font-weight: 900; margin-bottom: 20px; }
         
         .btn-buy-main {
             padding: 18px 50px; background: var(--accent); color: black;
             text-decoration: none; font-weight: 900; border-radius: 10px;
             text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.4); border: none; cursor: pointer;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.4); border: none; cursor: pointer; margin-top: 20px;
         }
         .btn-buy-main:hover { transform: scale(1.1); box-shadow: 0 0 50px var(--accent); }
 
-        .pricing-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px; max-width: 1200px; margin: 40px auto; padding: 0 8%;
-        }
-        .price-card {
-            background: var(--glass); border: 1px solid var(--border);
-            padding: 40px 25px; border-radius: 20px; text-align: center;
-        }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; max-width: 1200px; margin: 40px auto; padding: 0 8%; }
+        .price-card { background: var(--glass); border: 1px solid var(--border); padding: 40px 25px; border-radius: 20px; text-align: center; transition: 0.3s; }
+        .price-card:hover { border-color: var(--accent); transform: translateY(-5px); }
         .price-card h3 { color: var(--accent); margin-bottom: 15px; }
         .price-val { font-size: 32px; font-weight: 800; }
 
-        .roles-box {
-            max-width: 1100px; margin: 50px auto; background: var(--glass);
-            border: 1px solid var(--border); border-radius: 24px; padding: 40px;
-        }
+        .roles-box { max-width: 1100px; margin: 50px auto; background: var(--glass); border: 1px solid var(--border); border-radius: 24px; padding: 40px; }
         .role-badge { display: inline-block; padding: 6px 16px; border-radius: 6px; font-weight: 800; font-size: 12px; text-transform: uppercase; margin-right: 15px; min-width: 100px; text-align: center; }
         .owner { background: #ff4d6d; color: white; }
         .buyer { background: #ffb703; color: black; }
         .member { background: #4a4e69; color: white; }
 
-        /* Модалки */
-        .modal { 
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; 
-        }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: white; color: black; width: 420px; padding: 40px; border-radius: 16px; text-align: center; }
-        .social-btn { 
-            display: flex; align-items: center; justify-content: center; width: 100%; 
-            padding: 14px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; 
-            cursor: pointer; text-decoration: none; color: #333; font-weight: 700;
-        }
-        .google-icon-circle { width: 40px; height: 40px; margin-bottom: 15px; } /* */
-
-        .buy-link { display: block; padding: 15px; margin: 10px 0; background: #f0f0f0; border-radius: 8px; text-decoration: none; color: black; font-weight: 700; }
+        
+        .input-group { text-align: left; margin-top: 20px; }
+        .input-group label { font-size: 12px; font-weight: 700; color: #666; }
+        .input-group input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
+        
+        .social-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; margin-top: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; text-decoration: none; color: white; background: #4285F4; font-weight: 700; border: none; }
+        
+        .buy-link { display: block; padding: 15px; margin: 10px 0; background: #f0f0f0; border-radius: 8px; text-decoration: none; color: black; font-weight: 700; text-align: center; }
         .buy-link:hover { background: var(--accent); }
 
-        #profile-box { display: none; margin-top: 30px; padding-top: 20px; border-top: 1px dashed #444; }
+        #profile-box { display: none; margin-top: 30px; padding: 25px; background: rgba(255,255,255,0.05); border-radius: 15px; border-left: 4px solid var(--accent); }
     </style>
 </head>
 <body>
@@ -99,12 +83,12 @@
                 <a href="https://discord.gg/nCB3WsvfME" id="link-disc">Discord</a>
                 <a href="javascript:void(0)" id="link-prof" style="display:none;" onclick="showProfile()">Профіль</a>
             </div>
-            <button class="auth-btn" id="btn-login" onclick="openM('modal-auth1')">Вхід / Реєстрація</button>
+            <button class="auth-btn" id="btn-login" onclick="openM('modal-auth')">Вхід / Реєстрація</button>
         </div>
     </nav>
 
     <section class="hero">
-        <h1 style="color: var(--accent);">ASTRAL CLIENT</h1>
+        <h1 style="color: white; font-size: 80px;">ASTRAL <span style="color: var(--accent);">CLIENT</span></h1>
         <button class="btn-buy-main" onclick="openM('modal-buy')">Купити зараз</button>
     </section>
 
@@ -122,61 +106,66 @@
         <p><span class="role-badge member">MEMBER</span> — Учасник спільноти.</p>
 
         <div id="profile-box">
-            <h3 style="color: var(--accent); margin-top: 20px;">Ваш Профіль</h3>
-            <p>Користувач: <strong id="p-name"></strong></p>
-            <p>Email: <span id="p-email"></span></p>
-            <p>Ранг: <span class="role-badge buyer">BUYER</span></p>
+            <h3 style="color: var(--accent); margin-bottom: 10px;">Мій кабінет</h3>
+            <p>Вітаємо, <strong id="p-name"></strong></p>
+            <p style="opacity: 0.6; font-size: 14px;" id="p-email"></p>
+            <p style="margin-top: 10px;">Статус: <span class="role-badge buyer">BUYER</span></p>
         </div>
     </div>
 
     <div class="modal" id="modal-buy">
         <div class="modal-content">
-            <h2 style="margin-bottom: 20px;">Оберіть спосіб оплати</h2>
+            <h2 style="margin-bottom: 20px;">Купити Astral</h2>
             <a href="https://funpay.com/users/12045083/" target="_blank" class="buy-link"><i class="fas fa-shopping-cart"></i> FunPay</a>
-            <a href="https://t.me/Kopyy123" target="_blank" class="buy-link"><i class="fab fa-telegram"></i> Написати в Telegram</a>
+            <a href="https://t.me/Kopyy123" target="_blank" class="buy-link"><i class="fab fa-telegram"></i> Telegram (@Kopyy123)</a>
             <a href="https://discord.gg/nCB3WsvfME" target="_blank" class="buy-link"><i class="fab fa-discord"></i> Наш Discord</a>
             <button onclick="closeM('modal-buy')" style="margin-top: 15px; border: none; background: none; cursor: pointer; color: #888;">Закрити</button>
         </div>
     </div>
 
-    <div class="modal" id="modal-auth1">
+    <div class="modal" id="modal-auth">
         <div class="modal-content">
-            <h2 style="margin-bottom: 25px;">Увійти через</h2>
-            <div class="social-btn" onclick="toStep2()"><i class="fab fa-google" style="color: #4285F4;"></i> Google</div>
-            <div class="social-btn" onclick="toStep2()"><i class="fab fa-apple"></i> Apple</div>
-            <p style="font-size: 11px; color: #999; margin-top: 20px;">Під час входу ви погоджуєтеся з Умовами.</p>
-        </div>
-    </div>
-
-    <div class="modal" id="modal-auth2">
-        <div class="modal-content" style="text-align: left;">
-            <center><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon-circle"></center>
-            <h2 style="font-size: 20px; text-align: center;">Виберіть обліковий запис</h2>
-            <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">для входу в astral-client.com</p>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" style="width: 40px; margin-bottom: 10px;">
+            <h2 style="font-size: 20px;">Вхід через Google</h2>
+            <p style="color: #666; font-size: 14px;">Введіть ваші дані для Astral Client</p>
             
-            <div class="social-btn" onclick="login('ваня садовскій', 'vanasadovskij19@gmail.com')">
-                <i class="fas fa-user-circle" style="font-size: 24px;"></i>
-                <div style="margin-left: 10px;"><strong>ваня садовскій</strong><br><small>vanasadovskij19@gmail.com</small></div>
+            <div class="input-group">
+                <label>Ваше ім'я</label>
+                <input type="text" id="input-name" placeholder="Як вас звати?">
             </div>
-            <div class="social-btn" onclick="login('vanya', 'astralclient32@gmail.com')">
-                <i class="fas fa-user-circle" style="font-size: 24px;"></i>
-                <div style="margin-left: 10px;"><strong>vanya</strong><br><small>astralclient32@gmail.com</small></div>
+            <div class="input-group">
+                <label>Електронна пошта</label>
+                <input type="email" id="input-email" placeholder="example@gmail.com">
             </div>
+
+            <button class="social-btn" onclick="processLogin()">Продовжити</button>
+            <button onclick="closeM('modal-auth')" style="margin-top: 15px; border: none; background: none; cursor: pointer; color: #888;">Скасувати</button>
         </div>
     </div>
 
     <script>
         function openM(id) { document.getElementById(id).style.display = 'flex'; }
         function closeM(id) { document.getElementById(id).style.display = 'none'; }
-        function toStep2() { closeM('modal-auth1'); openM('modal-auth2'); }
 
-        function login(name, email) {
-            closeM('modal-auth2');
+        function processLogin() {
+            const name = document.getElementById('input-name').value;
+            const email = document.getElementById('input-email').value;
+
+            if(name === "" || email === "") {
+                alert("Будь ласка, заповніть всі поля!");
+                return;
+            }
+
+            // Ховаємо модалку та старі кнопки
+            closeM('modal-auth');
             document.getElementById('btn-login').style.display = 'none';
             document.getElementById('link-disc').style.display = 'none';
             document.getElementById('link-prof').style.display = 'inline-block';
+            
+            // Вставляємо введені дані в профіль
             document.getElementById('p-name').innerText = name;
             document.getElementById('p-email').innerText = email;
+            
             showProfile();
         }
 
