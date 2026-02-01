@@ -3,46 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lio Astral Client</title>
+    <title>Astral Client | Next Generation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
+        :root {
+            --primary: #00d4ff;
+            --secondary: #0055ff;
+            --bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
         body {
-            background: #0d1117;
-            color: #c9d1d9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: white;
+            overflow-x: hidden;
+            background: radial-gradient(circle at center, #111 0%, #050505 100%);
         }
-        .card {
-            text-align: center;
-            padding: 2rem;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            background: #161b22;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+
+        /* Анімований фон */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
         }
-        h1 { color: #58a6ff; margin-bottom: 0.5rem; }
-        p { font-size: 1.2rem; color: #8b949e; }
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: #238636;
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        .nav-links a {
             color: white;
             text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
+            margin-left: 30px;
+            transition: 0.3s;
+            font-size: 14px;
+            text-transform: uppercase;
         }
-        .btn:hover { background: #2ea043; }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            margin: 0;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.3));
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 600px;
+            margin: 20px 0 40px;
+        }
+
+        .btn-group { display: flex; gap: 20px; }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.4s;
+            cursor: pointer;
+        }
+
+        .btn-main {
+            background: var(--primary);
+            color: black;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
+        }
+
+        .features {
+            padding: 100px 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            background: rgba(0, 212, 255, 0.05);
+            transform: translateY(-10px);
+        }
+
+        .feature-card i {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #555;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>Lio Astral Client</h1>
-        <p>Ваш сайт успішно запущено!</p>
-        <a href="#" class="btn">Завантажити клієнт</a>
-    </div>
+    <div class="stars"></div>
+
+    <nav>
+        <div class="logo">Astral</div>
+        <div class="nav-links">
+            <a href="#">Головна</a>
+            <a href="#features">Функції</a>
+            <a href="https://discord.gg/yourlink">Discord</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>ASTRAL CLIENT</h1>
+        <p>Найкращий досвід гри з високим FPS, унікальними візуальними ефектами та просунутим функціоналом.</p>
+        <div class="btn-group">
+            <a href="#" class="btn btn-main">Завантажити</a>
+            <a href="https://discord.gg/yourlink" class="btn" style="border: 1px solid #444;">Discord</a>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="feature-card">
+            <i class="fas fa-bolt"></i>
+            <h3>Високий FPS</h3>
+            <p>Оптимізація коду для максимальної продуктивності на будь-якому ПК.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-shield-halved"></i>
+            <h3>Анти-чит</h3>
+            <p>Надійний захист та обхід перевірок на популярних серверах.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-palette"></i>
+            <h3>Visuals</h3>
+            <p>Сотні налаштувань інтерфейсу та візуальних модулів.</p>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2024 Astral Client. Не є офіційним продуктом Mojang.
+    </footer>
 </body>
 </html>
