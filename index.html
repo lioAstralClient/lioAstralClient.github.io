@@ -3,193 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astral Client | Next Generation</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <title>Astral Client — Next Generation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Основні стилі */
         :root {
-            --primary: #00d4ff;
-            --secondary: #0055ff;
-            --bg: #050505;
-            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent: #00e5ff;
+            --bg-dark: #0a0a0a;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg);
+            background-color: var(--bg-dark);
             color: white;
             overflow-x: hidden;
-            background: radial-gradient(circle at center, #111 0%, #050505 100%);
         }
 
-        /* Анімований фон */
-        .stars {
+        /* Фонове відео/анімація */
+        .video-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
             z-index: -1;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.3;
+            filter: brightness(0.4);
         }
 
+        /* Навігація */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 10%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 25px 8%;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--primary);
-            text-shadow: 0 0 10px var(--primary);
-        }
+        .logo { font-size: 22px; font-weight: 800; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; }
 
         .nav-links a {
-            color: white;
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
             margin-left: 30px;
-            transition: 0.3s;
-            font-size: 14px;
+            font-size: 13px;
+            font-weight: 600;
             text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        .nav-links a:hover { color: var(--primary); }
+        .nav-links a:hover { color: var(--accent); }
 
+        /* Головний екран */
         .hero {
-            height: 90vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
         }
 
         .hero h1 {
-            font-size: clamp(40px, 8vw, 80px);
-            margin: 0;
-            background: linear-gradient(to right, #fff, var(--primary));
+            font-size: 90px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #fff 40%, var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.3));
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: #aaa;
-            max-width: 600px;
-            margin: 20px 0 40px;
-        }
+        .hero p { color: rgba(255,255,255,0.5); font-size: 18px; margin-bottom: 35px; letter-spacing: 1px; }
 
-        .btn-group { display: flex; gap: 20px; }
+        /* Кнопки */
+        .btn-group { display: flex; gap: 15px; }
 
         .btn {
-            padding: 15px 35px;
-            border-radius: 5px;
+            padding: 14px 40px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-transform: uppercase;
-            transition: 0.4s;
-            cursor: pointer;
         }
 
-        .btn-main {
-            background: var(--primary);
-            color: black;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-        }
+        .btn-primary { background: var(--accent); color: #000; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); }
+        .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(0, 229, 255, 0.5); }
 
-        .btn-main:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
-        }
+        .btn-secondary { background: var(--glass); color: #fff; border: 1px solid var(--border); backdrop-filter: blur(5px); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--accent); }
 
-        .features {
-            padding: 100px 10%;
+        /* Секція контактів (Купити) */
+        .buy-section { padding: 100px 8%; display: flex; flex-direction: column; align-items: center; }
+
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+            margin-top: 50px;
         }
 
-        .feature-card {
-            background: var(--card-bg);
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--border);
             padding: 40px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
             text-align: center;
+            backdrop-filter: blur(10px);
             transition: 0.3s;
         }
 
-        .feature-card:hover {
-            border-color: var(--primary);
-            background: rgba(0, 212, 255, 0.05);
-            transform: translateY(-10px);
-        }
+        .card:hover { border-color: var(--accent); background: rgba(0, 229, 255, 0.05); transform: translateY(-5px); }
 
-        .feature-card i {
-            font-size: 40px;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
+        .card i { font-size: 40px; color: var(--accent); margin-bottom: 20px; }
+        .card h3 { margin-bottom: 15px; font-size: 20px; }
+        .card p { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 25px; }
 
-        footer {
-            text-align: center;
-            padding: 50px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #555;
+        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.2); font-size: 12px; }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 50px; }
         }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
+
+    <div class="video-bg" style="background: radial-gradient(circle at 50% 50%, #112233 0%, #050505 100%);"></div>
 
     <nav>
-        <div class="logo">Astral</div>
+        <div class="logo">ASTRAL</div>
         <div class="nav-links">
-            <a href="#">Головна</a>
-            <a href="#features">Функції</a>
-            <a href="https://discord.gg/yourlink">Discord</a>
+            <a href="#">Home</a>
+            <a href="#buy">Purchase</a>
+            <a href="https://discord.gg/nCB3WsvfME">Discord</a>
         </div>
     </nav>
 
     <section class="hero">
         <h1>ASTRAL CLIENT</h1>
-        <p>Найкращий досвід гри з високим FPS, унікальними візуальними ефектами та просунутим функціоналом.</p>
+        <p>Dominating the game with precision and style.</p>
         <div class="btn-group">
-            <a href="#" class="btn btn-main">Завантажити</a>
-            <a href="https://discord.gg/yourlink" class="btn" style="border: 1px solid #444;">Discord</a>
+            <a href="https://discord.gg/nCB3WsvfME" class="btn btn-primary">Download Now</a>
+            <a href="#buy" class="btn btn-secondary">View Prices</a>
         </div>
     </section>
 
-    <section class="features" id="features">
-        <div class="feature-card">
-            <i class="fas fa-bolt"></i>
-            <h3>Високий FPS</h3>
-            <p>Оптимізація коду для максимальної продуктивності на будь-якому ПК.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-shield-halved"></i>
-            <h3>Анти-чит</h3>
-            <p>Надійний захист та обхід перевірок на популярних серверах.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fas fa-palette"></i>
-            <h3>Visuals</h3>
-            <p>Сотні налаштувань інтерфейсу та візуальних модулів.</p>
+    <section class="buy-section" id="buy">
+        <h2 style="font-size: 32px; letter-spacing: 2px;">ОБЕРИ СПОСІБ ОПЛАТИ</h2>
+        <div class="grid">
+            <div class="card">
+                <i class="fab fa-discord"></i>
+                <h3>Discord</h3>
+                <p>Приєднуйся до нашої спільноти для підтримки та новин.</p>
+                <a href="https://discord.gg/nCB3WsvfME" class="btn btn-secondary" style="padding: 10px 20px;">Перейти</a>
+            </div>
+
+            <div class="card">
+                <i class="fab fa-telegram"></i>
+                <h3>Telegram</h3>
+                <p>Швидка покупка напряму через нашого менеджера.</p>
+                <a href="https://t.me/kopyy123" class="btn btn-secondary" style="padding: 10px 20px;">Написати</a>
+            </div>
+
+            <div class="card">
+                <i class="fas fa-shopping-cart"></i>
+                <h3>FunPay</h3>
+                <p>Купуй через перевірену торгову площадку з гарантією.</p>
+                <a href="https://funpay.com/users/12045083/" class="btn btn-secondary" style="padding: 10px 20px;">Купити</a>
+            </div>
         </div>
     </section>
 
     <footer>
-        &copy; 2024 Astral Client. Не є офіційним продуктом Mojang.
+        &copy; 2026 ASTRAL CLIENT. ALL RIGHTS RESERVED. <br>
+        NOT AN OFFICIAL MINECRAFT PRODUCT.
     </footer>
+
 </body>
 </html>
