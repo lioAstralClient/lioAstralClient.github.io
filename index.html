@@ -23,47 +23,87 @@
             background: radial-gradient(circle at 50% 50%, #112233 0%, #050505 100%);
         }
 
-        /* Навігація */
         nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 25px 8%; position: fixed; width: 100%; z-index: 1000;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(10px);
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
         }
+
         .logo { font-size: 22px; font-weight: 800; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; }
+
         .nav-right { display: flex; align-items: center; gap: 20px; }
         .nav-links a { text-decoration: none; color: white; font-size: 14px; font-weight: 600; margin-left: 20px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
-        .auth-nav-btn { background: var(--accent); color: black !important; padding: 8px 18px; border-radius: 5px; font-weight: 700; }
-
-        /* Головна */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero h1 { font-size: clamp(50px, 10vw, 90px); font-weight: 900; background: linear-gradient(to bottom, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero p { color: rgba(255,255,255,0.5); font-size: 18px; margin-top: 10px; }
-
-        /* Секція цін */
-        .section-padding { padding: 100px 8%; text-align: center; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1200px; margin: 50px auto; }
-        .price-card { background: var(--glass); border: 1px solid var(--border); padding: 35px 20px; border-radius: 20px; backdrop-filter: blur(10px); transition: 0.3s; }
-        .price-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-
-        /* Модальні вікна (Вхід) */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; }
-        .auth-window { background: white; color: black; width: 420px; padding: 40px; border-radius: 12px; text-align: center; position: relative; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         
-        .social-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; text-decoration: none; color: #333; font-weight: 600; }
-        .social-btn i { margin-right: 12px; font-size: 20px; }
-        .social-btn:hover { background: #f9f9f9; }
+        /* Кнопка входу в шапці */
+        .auth-nav-btn { background: var(--accent); color: black !important; padding: 8px 18px; border-radius: 5px; font-weight: 700; cursor: pointer; }
 
-        /* Система ролей */
-        .info-container { max-width: 900px; margin: 0 auto; background: var(--glass); border: 1px solid var(--border); border-radius: 25px; padding: 40px; text-align: left; }
-        .role-badge { display: inline-block; padding: 6px 14px; border-radius: 6px; font-weight: 800; font-size: 13px; text-transform: uppercase; margin-right: 15px; min-width: 90px; text-align: center; }
+        .hero {
+            height: 100vh;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(50px, 10vw, 90px);
+            font-weight: 900; letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff 40%, var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .hero p { color: rgba(255,255,255,0.5); font-size: 18px; margin-bottom: 35px; letter-spacing: 1px; }
+
+        .btn-group { display: flex; gap: 15px; }
+        .btn {
+            padding: 14px 40px; border-radius: 8px; text-decoration: none;
+            font-weight: 700; font-size: 14px; text-transform: uppercase;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer; display: inline-block;
+        }
+        .btn-primary { background: var(--accent); color: #000; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); border: none; }
+        .btn-secondary { background: var(--glass); color: #fff; border: 1px solid var(--border); backdrop-filter: blur(5px); }
+
+        .section-padding { padding: 100px 8%; text-align: center; }
+
+        .pricing-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px; max-width: 1200px; margin: 50px auto;
+        }
+
+        .price-card {
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 35px 20px; border-radius: 20px; backdrop-filter: blur(10px); transition: 0.3s;
+        }
+
+        .info-container {
+            max-width: 1100px; margin: 0 auto; background: var(--glass);
+            border: 1px solid var(--border); border-radius: 25px; padding: 40px;
+            text-align: left; backdrop-filter: blur(10px);
+        }
+
+        .role-badge {
+            display: inline-block; padding: 6px 14px; border-radius: 6px;
+            font-weight: 800; font-size: 13px; margin-right: 15px; text-transform: uppercase;
+            min-width: 90px; text-align: center;
+        }
         .owner { background: #ff4d6d; color: white; }
         .buyer { background: #ffb703; color: black; }
         .member { background: #4a4e69; color: white; }
-        .tech-admin { color: #00e5ff; font-weight: bold; font-style: italic; }
+        .tech-admin { color: #00e5ff; font-weight: bold; font-style: italic; font-size: 18px; }
 
-        #profile-section { display: none; margin-top: 30px; padding-top: 30px; border-top: 1px solid var(--border); }
+        /* Модальні вікна (білі як на скріншотах) */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; }
+        .auth-window { background: white; color: black; width: 420px; padding: 40px; border-radius: 12px; text-align: center; position: relative; }
+        .social-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; color: #333; font-weight: 600; text-decoration: none; }
+        .social-btn:hover { background: #f9f9f9; }
+        .social-btn i { margin-right: 12px; font-size: 20px; }
+
+        /* Секція профілю */
+        #profile-content { display: none; margin-top: 30px; border-top: 1px solid var(--border); padding-top: 30px; }
+
+        footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.2); font-size: 12px; }
     </style>
 </head>
 <body>
@@ -75,115 +115,121 @@
         <div class="nav-right">
             <div class="nav-links">
                 <a href="#">Головна</a>
-                <a href="#prices">Ціни</a>
+                <a href="#buy">Ціни</a>
                 <a href="https://discord.gg/nCB3WsvfME" id="nav-discord">Discord</a>
-                <a href="javascript:void(0)" id="nav-profile" style="display:none;" onclick="showProfile()">Профіль</a>
+                <a href="javascript:void(0)" id="nav-profile" style="display:none;" onclick="scrollToProfile()">Профіль</a>
             </div>
-            <a href="javascript:void(0)" class="auth-nav-btn" id="login-btn" onclick="openAuth()">Вхід / Реєстрація</a>
+            <div class="auth-nav-btn" id="login-nav-btn" onclick="openStep1()">Вхід / Реєстрація</div>
         </div>
     </nav>
 
     <section class="hero">
         <h1>ASTRAL CLIENT</h1>
         <p>Домінуйте в грі з точністю та стилем.</p>
-    </section>
-
-    <section class="section-padding" id="prices">
-        <h2 style="margin-bottom: 40px; font-size: 32px; text-transform: uppercase;">Тарифи</h2>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <h3 style="color: var(--accent);">30 Днів</h3>
-                <div style="font-size: 28px; margin: 15px 0;">299 ₽</div>
-                <small>₴155 | $3.69</small>
-            </div>
-            <div class="price-card" style="border-color: var(--accent);">
-                <h3 style="background: var(--accent); color: black; padding: 2px 10px; border-radius: 4px; display: inline-block;">Lifetime</h3>
-                <div style="font-size: 28px; margin: 15px 0;">599 ₽</div>
-                <small>₴311 | $7.40</small>
-            </div>
+        <div class="btn-group">
+            <a href="#buy" class="btn btn-primary">Купити зараз</a>
+            <a href="https://discord.gg/nCB3WsvfME" class="btn btn-secondary">Discord</a>
         </div>
     </section>
 
-    <section class="section-padding" id="info">
-        <div class="info-container">
-            <h2 style="margin-bottom: 30px;">Система ролей</h2>
+    <section class="section-padding" id="buy">
+        <h2 style="font-size: 32px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px;">Ціни клієнта</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3 style="color: var(--accent); margin-bottom: 15px;">30 Днів</h3>
+                <div style="font-size: 26px; font-weight: 800;">299 ₽</div>
+                <div style="color: rgba(255,255,255,0.5);">₴155 | $3.69</div>
+            </div>
+            <div class="price-card" style="border-color: var(--accent); box-shadow: 0 0 20px rgba(0,229,255,0.2);">
+                <h3 style="background: var(--accent); color: black; display: inline-block; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px;">Lifetime</h3>
+                <div style="font-size: 26px; font-weight: 800;">599 ₽</div>
+                <div style="color: rgba(255,255,255,0.5);">₴311 | $7.40</div>
+            </div>
+        </div>
+
+        <div class="info-container" id="info-section">
+            <h2 style="margin-bottom: 25px; font-size: 28px; font-weight: 800;">Система ролей</h2>
             <div style="line-height: 2.8;">
                 <p><span class="role-badge owner">OWNER</span> — Овнери видають реєстрацію в Discord.</p>
                 <p><span class="role-badge buyer">BUYER</span> — Видається автоматично при покупці клієнта.</p>
                 <p><span class="role-badge member">MEMBER</span> — Учасник спільноти.</p>
             </div>
 
-            <div id="profile-section">
-                <h2 style="color: var(--accent); margin-bottom: 20px;">Мій профіль</h2>
-                <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px;">
-                    <p style="font-size: 18px;">Користувач: <strong id="user-name-display"></strong></p>
-                    <p style="margin-top: 10px;">Пошта: <span id="user-email-display" style="opacity: 0.7;"></span></p>
-                    <p style="margin-top: 10px;">Ваша роль: <span class="role-badge buyer">BUYER</span></p>
-                </div>
+            <div id="profile-content">
+                <h3 style="color: var(--accent); margin-bottom: 15px;">Мій профіль</h3>
+                <p>Користувач: <strong id="display-name"></strong></p>
+                <p>Електронна пошта: <span id="display-email" style="opacity: 0.6;"></span></p>
+                <p style="margin-top: 10px;">Статус: <span class="role-badge buyer">BUYER</span></p>
             </div>
-
-            <p style="margin-top: 40px;">Технічна підтримка: <span class="tech-admin">𝘛𝘦𝘹.𝘈𝘥𝘮𝘪𝘯</span></p>
+            
+            <p style="margin-top: 40px; font-size: 16px;">Технічна підтримка: <span class="tech-admin">𝘛𝘦𝘹.𝘈𝘥𝘮𝘪𝘯</span></p>
         </div>
     </section>
 
-    <div class="modal-overlay" id="modal-step-1">
+    <div class="modal-overlay" id="modal-1">
         <div class="auth-window">
-            <h2 style="margin-bottom: 20px;">Продовжити через</h2>
-            <div class="social-btn" onclick="nextStep()"><i class="fab fa-google" style="color: #4285F4;"></i> Google</div>
-            <div class="social-btn" onclick="nextStep()"><i class="fab fa-apple"></i> Apple</div>
-            <div class="social-btn" onclick="nextStep()"><i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook</div>
+            <h2 style="margin-bottom: 25px;">Продовжити через</h2>
+            <div class="social-btn" onclick="openStep2()"><i class="fab fa-google" style="color: #4285F4;"></i> Продовжити через Google</div>
+            <div class="social-btn" onclick="openStep2()"><i class="fab fa-facebook" style="color: #1877F2;"></i> Продовжити через Facebook</div>
+            <div class="social-btn" onclick="openStep2()"><i class="fab fa-apple"></i> Продовжити через Apple</div>
             <p style="font-size: 11px; color: #888; margin-top: 20px;">Під час входу ви погоджуєтеся з Умовами користування.</p>
         </div>
     </div>
 
-    <div class="modal-overlay" id="modal-step-2">
+    <div class="modal-overlay" id="modal-2">
         <div class="auth-window" style="text-align: left;">
-            <h2 style="font-size: 20px;">Виберіть обліковий запис</h2>
+            <h2 style="font-size: 20px; margin-bottom: 5px;">Виберіть обліковий запис</h2>
             <p style="color: #666; font-size: 14px; margin-bottom: 20px;">для переходу в astral-client.com</p>
             
-            <div class="social-btn" onclick="doLogin('ваня садовскій', 'vanasadovskij19@gmail.com')">
-                <i class="fas fa-user-circle" style="font-size: 30px;"></i>
-                <div style="text-align: left; margin-left: 10px;">
+            <div class="social-btn" onclick="finishAuth('ваня садовскій', 'vanasadovskij19@gmail.com')">
+                <i class="fas fa-user-circle" style="font-size: 30px; color: #5f6368;"></i>
+                <div style="margin-left: 10px;">
                     <strong>ваня садовскій</strong><br><small>vanasadovskij19@gmail.com</small>
                 </div>
             </div>
-            
-            <div class="social-btn" onclick="doLogin('vanya', 'astralclient32@gmail.com')">
-                <i class="fas fa-user-circle" style="font-size: 30px;"></i>
-                <div style="text-align: left; margin-left: 10px;">
+
+            <div class="social-btn" onclick="finishAuth('vanya', 'astralclient32@gmail.com')">
+                <i class="fas fa-user-circle" style="font-size: 30px; color: #5f6368;"></i>
+                <div style="margin-left: 10px;">
                     <strong>vanya</strong><br><small>astralclient32@gmail.com</small>
                 </div>
             </div>
         </div>
     </div>
 
+    <footer>
+        &copy; 2026 ASTRAL CLIENT. ВСІ ПРАВА ЗАХИЩЕНІ. <br>
+        НЕ Є ОФІЦІЙНИМ ПРОДУКТОМ MINECRAFT.
+    </footer>
+
     <script>
-        function openAuth() { document.getElementById('modal-step-1').style.display = 'flex'; }
+        function openStep1() { document.getElementById('modal-1').style.display = 'flex'; }
         
-        function nextStep() {
-            document.getElementById('modal-step-1').style.display = 'none';
-            document.getElementById('modal-step-2').style.display = 'flex';
+        function openStep2() {
+            document.getElementById('modal-1').style.display = 'none';
+            document.getElementById('modal-2').style.display = 'flex';
         }
 
-        function doLogin(name, email) {
-            document.getElementById('modal-step-2').style.display = 'none';
+        function finishAuth(name, email) {
+            document.getElementById('modal-2').style.display = 'none';
             
-            // Зміна кнопок у шапці
-            document.getElementById('login-btn').style.display = 'none';
+            // Міняємо кнопки в навігації
+            document.getElementById('login-nav-btn').style.display = 'none';
             document.getElementById('nav-discord').style.display = 'none';
-            document.getElementById('nav-profile').style.display = 'block';
+            document.getElementById('nav-profile').style.display = 'inline-block';
             
-            // Заповнення даних профілю
-            document.getElementById('user-name-display').innerText = name;
-            document.getElementById('user-email-display').innerText = email;
+            // Заповнюємо дані профілю
+            document.getElementById('display-name').innerText = name;
+            document.getElementById('display-email').innerText = email;
             
-            alert('Успішний вхід: ' + name);
+            alert('Ви успішно увійшли як ' + name);
         }
 
-        function showProfile() {
-            document.getElementById('profile-section').style.display = 'block';
-            window.location.hash = "info";
+        function scrollToProfile() {
+            document.getElementById('profile-content').style.display = 'block';
+            document.getElementById('info-section').scrollIntoView();
         }
     </script>
+
 </body>
 </html>
