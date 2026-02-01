@@ -21,7 +21,6 @@
             background: radial-gradient(circle at 50% 50%, #112233 0%, #050505 100%);
         }
 
-        /* Навігація */
         nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 8%; position: fixed; width: 100%; z-index: 1000;
@@ -29,72 +28,62 @@
         }
         .logo { font-size: 24px; font-weight: 900; color: var(--accent); letter-spacing: 2px; }
         .nav-right { display: flex; align-items: center; gap: 25px; }
-        .nav-links a { text-decoration: none; color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 600; transition: 0.3s; }
+        .nav-links a { text-decoration: none; color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 600; margin-left: 20px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
         
         .auth-btn { 
             background: var(--accent); color: black !important; padding: 10px 22px; 
-            border-radius: 6px; font-weight: 800; cursor: pointer; border: none;
-            transition: 0.3s; text-transform: uppercase; font-size: 12px;
+            border-radius: 6px; font-weight: 800; cursor: pointer; border: none; font-size: 12px;
         }
-        .auth-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4); }
 
-        /* Hero */
-        .hero { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero h1 { font-size: clamp(50px, 8vw, 100px); font-weight: 900; letter-spacing: -3px; margin-bottom: 15px; }
-        .hero p { color: rgba(255,255,255,0.5); font-size: 20px; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .hero h1 { font-size: clamp(50px, 8vw, 100px); font-weight: 900; margin-bottom: 20px; }
+        
+        .btn-buy-main {
+            padding: 18px 50px; background: var(--accent); color: black;
+            text-decoration: none; font-weight: 900; border-radius: 10px;
+            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.4); border: none; cursor: pointer;
+        }
+        .btn-buy-main:hover { transform: scale(1.1); box-shadow: 0 0 50px var(--accent); }
 
-        /* Ціни */
-        .pricing-section { padding: 60px 8%; text-align: center; }
         .pricing-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px; max-width: 1200px; margin: 40px auto;
+            gap: 25px; max-width: 1200px; margin: 40px auto; padding: 0 8%;
         }
         .price-card {
             background: var(--glass); border: 1px solid var(--border);
-            padding: 40px 25px; border-radius: 20px; transition: 0.4s;
-            position: relative; overflow: hidden;
+            padding: 40px 25px; border-radius: 20px; text-align: center;
         }
-        .price-card:hover { border-color: var(--accent); background: rgba(0, 229, 255, 0.03); transform: translateY(-10px); }
-        .price-card h3 { font-size: 22px; margin-bottom: 15px; color: var(--accent); }
-        .price-val { font-size: 32px; font-weight: 800; margin-bottom: 5px; }
-        .price-sub { color: rgba(255,255,255,0.4); font-size: 14px; }
+        .price-card h3 { color: var(--accent); margin-bottom: 15px; }
+        .price-val { font-size: 32px; font-weight: 800; }
 
-        /* Система ролей */
         .roles-box {
             max-width: 1100px; margin: 50px auto; background: var(--glass);
-            border: 1px solid var(--border); border-radius: 24px; padding: 40px; text-align: left;
+            border: 1px solid var(--border); border-radius: 24px; padding: 40px;
         }
-        .role-badge {
-            display: inline-block; padding: 6px 16px; border-radius: 6px;
-            font-weight: 800; font-size: 12px; text-transform: uppercase; margin-right: 15px;
-            min-width: 100px; text-align: center;
-        }
+        .role-badge { display: inline-block; padding: 6px 16px; border-radius: 6px; font-weight: 800; font-size: 12px; text-transform: uppercase; margin-right: 15px; min-width: 100px; text-align: center; }
         .owner { background: #ff4d6d; color: white; }
         .buyer { background: #ffb703; color: black; }
         .member { background: #4a4e69; color: white; }
-        .tech-admin { color: #00e5ff; font-weight: bold; font-style: italic; }
 
-        /* Модалки входу */
+        /* Модалки */
         .modal { 
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; 
         }
-        .auth-card { background: white; color: black; width: 400px; padding: 40px; border-radius: 16px; text-align: center; }
-        .auth-card h2 { margin-bottom: 25px; font-weight: 800; }
+        .modal-content { background: white; color: black; width: 420px; padding: 40px; border-radius: 16px; text-align: center; }
         .social-btn { 
             display: flex; align-items: center; justify-content: center; width: 100%; 
             padding: 14px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 8px; 
-            cursor: pointer; text-decoration: none; color: #333; font-weight: 700; transition: 0.2s;
+            cursor: pointer; text-decoration: none; color: #333; font-weight: 700;
         }
-        .social-btn:hover { background: #f8f8f8; border-color: #bbb; }
-        .social-btn i { margin-right: 12px; font-size: 20px; }
+        .google-icon-circle { width: 40px; height: 40px; margin-bottom: 15px; } /* */
 
-        /* Картка профілю */
-        #profile-view { 
-            display: none; background: rgba(255,255,255,0.05); 
-            padding: 25px; border-radius: 15px; margin-top: 30px; border: 1px solid var(--accent);
-        }
+        .buy-link { display: block; padding: 15px; margin: 10px 0; background: #f0f0f0; border-radius: 8px; text-decoration: none; color: black; font-weight: 700; }
+        .buy-link:hover { background: var(--accent); }
+
+        #profile-box { display: none; margin-top: 30px; padding-top: 20px; border-top: 1px dashed #444; }
     </style>
 </head>
 <body>
@@ -107,115 +96,94 @@
             <div class="nav-links">
                 <a href="#">Головна</a>
                 <a href="#prices">Ціни</a>
-                <a href="https://discord.gg/nCB3WsvfME" id="disc-link">Discord</a>
-                <a href="javascript:void(0)" id="prof-link" style="display:none;" onclick="showProfile()">Профіль</a>
+                <a href="https://discord.gg/nCB3WsvfME" id="link-disc">Discord</a>
+                <a href="javascript:void(0)" id="link-prof" style="display:none;" onclick="showProfile()">Профіль</a>
             </div>
-            <button class="auth-btn" id="login-nav" onclick="openModal('modal-step1')">Вхід / Реєстрація</button>
+            <button class="auth-btn" id="btn-login" onclick="openM('modal-auth1')">Вхід / Реєстрація</button>
         </div>
     </nav>
 
     <section class="hero">
-        <h1>ASTRAL CLIENT</h1>
-        <p>Наступне покоління ігрових переваг.</p>
+        <h1 style="color: var(--accent);">ASTRAL CLIENT</h1>
+        <button class="btn-buy-main" onclick="openM('modal-buy')">Купити зараз</button>
     </section>
 
-    <section class="pricing-section" id="prices">
-        <h2 style="font-size: 36px; text-transform: uppercase; letter-spacing: 2px;">Тарифи клієнта</h2>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <h3>30 Днів</h3>
-                <div class="price-val">299 ₽</div>
-                <div class="price-sub">₴155 | $3.69</div>
-            </div>
-            <div class="price-card">
-                <h3>90 Днів</h3>
-                <div class="price-val">399 ₽</div>
-                <div class="price-sub">₴207 | $4.95</div>
-            </div>
-            <div class="price-card">
-                <h3>1 Рік</h3>
-                <div class="price-val">449 ₽</div>
-                <div class="price-sub">₴230 | $5.55</div>
-            </div>
-            <div class="price-card" style="border-color: var(--accent);">
-                <span style="background: var(--accent); color: black; font-size: 10px; font-weight: 900; padding: 2px 10px; border-radius: 4px; position: absolute; top: 15px; right: 15px;">BEST</span>
-                <h3>Lifetime</h3>
-                <div class="price-val">599 ₽</div>
-                <div class="price-sub">₴311 | $7.40</div>
-            </div>
-        </div>
+    <div class="pricing-grid" id="prices">
+        <div class="price-card"><h3>30 Днів</h3><div class="price-val">299 ₽</div><small>₴155 | $3.69</small></div>
+        <div class="price-card"><h3>90 Днів</h3><div class="price-val">399 ₽</div><small>₴207 | $4.95</small></div>
+        <div class="price-card"><h3>1 Рік</h3><div class="price-val">449 ₽</div><small>₴230 | $5.55</small></div>
+        <div class="price-card" style="border-color: var(--accent);"><h3>Lifetime</h3><div class="price-val">599 ₽</div><small>₴311 | $7.40</small></div>
+    </div>
 
-        <div class="roles-box" id="info">
-            <h2 style="margin-bottom: 25px;">Система ролей</h2>
-            <div style="line-height: 3;">
-                <p><span class="role-badge owner">OWNER</span> — Овнери видають реєстрацію в Discord.</p>
-                <p><span class="role-badge buyer">BUYER</span> — Видається автоматично при покупці клієнта.</p>
-                <p><span class="role-badge member">MEMBER</span> — Учасник спільноти.</p>
-            </div>
+    <div class="roles-box" id="info-area">
+        <h2 style="margin-bottom: 20px;">Система ролей</h2>
+        <p><span class="role-badge owner">OWNER</span> — Овнери видають реєстрацію в Discord.</p>
+        <p><span class="role-badge buyer">BUYER</span> — Видається автоматично при покупці клієнта.</p>
+        <p><span class="role-badge member">MEMBER</span> — Учасник спільноти.</p>
 
-            <div id="profile-view">
-                <h3 style="color: var(--accent); margin-bottom: 10px;">Особистий кабінет</h3>
-                <p>Вітаємо, <strong id="u-name"></strong>!</p>
-                <p style="font-size: 14px; opacity: 0.6;" id="u-email"></p>
-                <div style="margin-top: 15px;">Ваш статус: <span class="role-badge buyer">BUYER</span></div>
-            </div>
-
-            <p style="margin-top: 40px;">Технічна підтримка: <span class="tech-admin">𝘛𝘦𝘹.𝘈𝘥𝘮𝘪𝘯</span></p>
-        </div>
-    </section>
-
-    <div class="modal" id="modal-step1">
-        <div class="auth-card">
-            <h2>Продовжити через</h2>
-            <div class="social-btn" onclick="nextStep()"><i class="fab fa-google" style="color: #4285F4;"></i> Google</div>
-            <div class="social-btn" onclick="nextStep()"><i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook</div>
-            <div class="social-btn" onclick="nextStep()"><i class="fab fa-apple"></i> Apple</div>
-            <p style="font-size: 11px; color: #999; margin-top: 20px;">Входячи, ви приймаєте Умови сервісу.</p>
+        <div id="profile-box">
+            <h3 style="color: var(--accent); margin-top: 20px;">Ваш Профіль</h3>
+            <p>Користувач: <strong id="p-name"></strong></p>
+            <p>Email: <span id="p-email"></span></p>
+            <p>Ранг: <span class="role-badge buyer">BUYER</span></p>
         </div>
     </div>
 
-    <div class="modal" id="modal-step2">
-        <div class="auth-card" style="text-align: left;">
-            <h2 style="font-size: 20px; margin-bottom: 10px;">Виберіть акаунт</h2>
-            <p style="font-size: 14px; color: #666; margin-bottom: 20px;">для входу в astral-client.com</p>
+    <div class="modal" id="modal-buy">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 20px;">Оберіть спосіб оплати</h2>
+            <a href="https://funpay.com/users/12045083/" target="_blank" class="buy-link"><i class="fas fa-shopping-cart"></i> FunPay</a>
+            <a href="https://t.me/Kopyy123" target="_blank" class="buy-link"><i class="fab fa-telegram"></i> Написати в Telegram</a>
+            <a href="https://discord.gg/nCB3WsvfME" target="_blank" class="buy-link"><i class="fab fa-discord"></i> Наш Discord</a>
+            <button onclick="closeM('modal-buy')" style="margin-top: 15px; border: none; background: none; cursor: pointer; color: #888;">Закрити</button>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-auth1">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 25px;">Увійти через</h2>
+            <div class="social-btn" onclick="toStep2()"><i class="fab fa-google" style="color: #4285F4;"></i> Google</div>
+            <div class="social-btn" onclick="toStep2()"><i class="fab fa-apple"></i> Apple</div>
+            <p style="font-size: 11px; color: #999; margin-top: 20px;">Під час входу ви погоджуєтеся з Умовами.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-auth2">
+        <div class="modal-content" style="text-align: left;">
+            <center><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" class="google-icon-circle"></center>
+            <h2 style="font-size: 20px; text-align: center;">Виберіть обліковий запис</h2>
+            <p style="text-align: center; color: #666; font-size: 14px; margin-bottom: 20px;">для входу в astral-client.com</p>
             
-            <div class="social-btn" onclick="doLogin('ваня садовскій', 'vanasadovskij19@gmail.com')">
-                <i class="fas fa-user-circle" style="font-size: 28px;"></i>
+            <div class="social-btn" onclick="login('ваня садовскій', 'vanasadovskij19@gmail.com')">
+                <i class="fas fa-user-circle" style="font-size: 24px;"></i>
                 <div style="margin-left: 10px;"><strong>ваня садовскій</strong><br><small>vanasadovskij19@gmail.com</small></div>
             </div>
-            
-            <div class="social-btn" onclick="doLogin('vanya', 'astralclient32@gmail.com')">
-                <i class="fas fa-user-circle" style="font-size: 28px;"></i>
+            <div class="social-btn" onclick="login('vanya', 'astralclient32@gmail.com')">
+                <i class="fas fa-user-circle" style="font-size: 24px;"></i>
                 <div style="margin-left: 10px;"><strong>vanya</strong><br><small>astralclient32@gmail.com</small></div>
             </div>
         </div>
     </div>
 
     <script>
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        function openM(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeM(id) { document.getElementById(id).style.display = 'none'; }
+        function toStep2() { closeM('modal-auth1'); openM('modal-auth2'); }
 
-        function nextStep() {
-            closeModal('modal-step1');
-            openModal('modal-step2');
-        }
-
-        function doLogin(name, email) {
-            closeModal('modal-step2');
-            document.getElementById('login-nav').style.display = 'none';
-            document.getElementById('disc-link').style.display = 'none';
-            document.getElementById('prof-link').style.display = 'inline-block';
-            
-            document.getElementById('u-name').innerText = name;
-            document.getElementById('u-email').innerText = email;
-            alert('Вхід успішний! Вітаємо, ' + name);
+        function login(name, email) {
+            closeM('modal-auth2');
+            document.getElementById('btn-login').style.display = 'none';
+            document.getElementById('link-disc').style.display = 'none';
+            document.getElementById('link-prof').style.display = 'inline-block';
+            document.getElementById('p-name').innerText = name;
+            document.getElementById('p-email').innerText = email;
+            showProfile();
         }
 
         function showProfile() {
-            document.getElementById('profile-view').style.display = 'block';
-            document.getElementById('info').scrollIntoView();
+            document.getElementById('profile-box').style.display = 'block';
+            document.getElementById('info-area').scrollIntoView();
         }
     </script>
-
 </body>
 </html>
