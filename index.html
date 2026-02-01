@@ -16,6 +16,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--bg-dark); color: white; overflow-x: hidden; }
 
+        /* Фонове відео/градієнт */
         .video-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at 50% 50%, #112233 0%, #050505 100%);
@@ -28,46 +29,37 @@
         }
         .logo { font-size: 24px; font-weight: 900; color: var(--accent); letter-spacing: 2px; }
         .nav-right { display: flex; align-items: center; gap: 25px; }
-        .nav-links a { text-decoration: none; color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 600; margin-left: 20px; transition: 0.3s; }
+        .nav-links a { text-decoration: none; color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 600; margin-left: 20px; transition: 0.3s; cursor: pointer; }
         .nav-links a:hover { color: var(--accent); }
         
         .auth-btn { background: var(--accent); color: black !important; padding: 10px 22px; border-radius: 6px; font-weight: 800; cursor: pointer; border: none; font-size: 12px; }
 
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        
         .btn-buy-main {
             padding: 18px 50px; background: var(--accent); color: black;
             text-decoration: none; font-weight: 900; border-radius: 10px;
             text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.4); border: none; cursor: pointer; margin-top: 20px;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.4); border: none; cursor: pointer;
         }
-        .btn-buy-main:hover { transform: scale(1.1); box-shadow: 0 0 50px var(--accent); }
 
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; max-width: 1200px; margin: 40px auto; padding: 0 8%; }
-        .price-card { background: var(--glass); border: 1px solid var(--border); padding: 40px 25px; border-radius: 20px; text-align: center; transition: 0.3s; }
-        .price-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-        .price-card h3 { color: var(--accent); margin-bottom: 15px; }
-        .price-val { font-size: 32px; font-weight: 800; }
-
-        .roles-box { max-width: 1100px; margin: 50px auto; background: var(--glass); border: 1px solid var(--border); border-radius: 24px; padding: 40px; }
-        .role-badge { display: inline-block; padding: 6px 16px; border-radius: 6px; font-weight: 800; font-size: 12px; text-transform: uppercase; margin-right: 15px; min-width: 100px; text-align: center; }
-        .owner { background: #ff4d6d; color: white; }
-        .buyer { background: #ffb703; color: black; }
-        .member { background: #4a4e69; color: white; }
+        .price-card { background: var(--glass); border: 1px solid var(--border); padding: 40px 25px; border-radius: 20px; text-align: center; }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: white; color: black; width: 420px; padding: 40px; border-radius: 16px; text-align: center; }
+        .modal-content { background: white; color: black; width: 400px; padding: 40px; border-radius: 16px; text-align: center; position: relative; }
         
-        .input-group { text-align: left; margin-top: 20px; }
-        .input-group label { font-size: 12px; font-weight: 700; color: #666; }
-        .input-group input { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
-        
-        .social-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 14px; margin-top: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; text-decoration: none; color: white; background: #4285F4; font-weight: 700; border: none; }
-        
-        .buy-link { display: block; padding: 15px; margin: 10px 0; background: #f0f0f0; border-radius: 8px; text-decoration: none; color: black; font-weight: 700; text-align: center; }
-        .buy-link:hover { background: var(--accent); }
+        /* Стилі ролей */
+        .role-badge { display: inline-block; padding: 6px 16px; border-radius: 6px; font-weight: 800; font-size: 12px; text-transform: uppercase; min-width: 100px; text-align: center; }
+        .owner { background: #ff4d6d; color: white; }
+        .buyer { background: #ffb703; color: black; }
 
-        #profile-box { display: none; margin-top: 30px; padding: 25px; background: rgba(255,255,255,0.05); border-radius: 15px; border-left: 4px solid var(--accent); }
+        .input-field { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
+        .primary-btn { width: 100%; padding: 14px; background: #4285F4; color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+        
+        /* Картка профілю (темна) */
+        .profile-card-modal { background: #1a1a1a !important; color: white !important; }
+
+        .buy-link { display: block; padding: 15px; margin: 10px 0; background: #f0f0f0; border-radius: 8px; text-decoration: none; color: black; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -80,66 +72,63 @@
             <div class="nav-links">
                 <a href="#">Головна</a>
                 <a href="#prices">Ціни</a>
-                <a href="https://discord.gg/nCB3WsvfME" id="link-disc">Discord</a>
-                <a href="javascript:void(0)" id="link-prof" style="display:none;" onclick="showProfile()">Профіль</a>
+                <a href="https://discord.gg/nCB3WsvfME" id="nav-disc">Discord</a>
+                <a id="nav-prof" style="display:none;" onclick="openM('modal-profile')">Профіль</a>
             </div>
             <button class="auth-btn" id="btn-login" onclick="openM('modal-auth')">Вхід / Реєстрація</button>
         </div>
     </nav>
 
     <section class="hero">
-        <h1 style="color: white; font-size: 80px;">ASTRAL <span style="color: var(--accent);">CLIENT</span></h1>
-        <button class="btn-buy-main" onclick="openM('modal-buy')">Купити зараз</button>
+        <h1 style="font-size: 70px; margin-bottom: 20px;">ASTRAL <span style="color: var(--accent);">CLIENT</span></h1>
+        <button class="btn-buy-main" onclick="openM('modal-buy')">Купити</button>
     </section>
 
     <div class="pricing-grid" id="prices">
         <div class="price-card"><h3>30 Днів</h3><div class="price-val">299 ₽</div><small>₴155 | $3.69</small></div>
         <div class="price-card"><h3>90 Днів</h3><div class="price-val">399 ₽</div><small>₴207 | $4.95</small></div>
         <div class="price-card"><h3>1 Рік</h3><div class="price-val">449 ₽</div><small>₴230 | $5.55</small></div>
-        <div class="price-card" style="border-color: var(--accent);"><h3>Lifetime</h3><div class="price-val">599 ₽</div><small>₴311 | $7.40</small></div>
-    </div>
-
-    <div class="roles-box" id="info-area">
-        <h2 style="margin-bottom: 20px;">Система ролей</h2>
-        <p><span class="role-badge owner">OWNER</span> — Овнери видають реєстрацію в Discord.</p>
-        <p><span class="role-badge buyer">BUYER</span> — Видається автоматично при покупці клієнта.</p>
-        <p><span class="role-badge member">MEMBER</span> — Учасник спільноти.</p>
-
-        <div id="profile-box">
-            <h3 style="color: var(--accent); margin-bottom: 10px;">Мій кабінет</h3>
-            <p>Вітаємо, <strong id="p-name"></strong></p>
-            <p style="opacity: 0.6; font-size: 14px;" id="p-email"></p>
-            <p style="margin-top: 10px;">Статус: <span class="role-badge buyer">BUYER</span></p>
-        </div>
+        <div class="price-card" style="border: 2px solid var(--accent);"><h3>Lifetime</h3><div class="price-val">599 ₽</div><small>₴311 | $7.40</small></div>
     </div>
 
     <div class="modal" id="modal-buy">
         <div class="modal-content">
-            <h2 style="margin-bottom: 20px;">Купити Astral</h2>
-            <a href="https://funpay.com/users/12045083/" target="_blank" class="buy-link"><i class="fas fa-shopping-cart"></i> FunPay</a>
-            <a href="https://t.me/Kopyy123" target="_blank" class="buy-link"><i class="fab fa-telegram"></i> Telegram (@Kopyy123)</a>
-            <a href="https://discord.gg/nCB3WsvfME" target="_blank" class="buy-link"><i class="fab fa-discord"></i> Наш Discord</a>
-            <button onclick="closeM('modal-buy')" style="margin-top: 15px; border: none; background: none; cursor: pointer; color: #888;">Закрити</button>
+            <h2>Оплатити доступ</h2>
+            <a href="https://funpay.com/users/12045083/" target="_blank" class="buy-link">FunPay</a>
+            <a href="https://t.me/Kopyy123" target="_blank" class="buy-link">Telegram (@Kopyy123)</a>
+            <button onclick="closeM('modal-buy')">Закрити</button>
         </div>
     </div>
 
     <div class="modal" id="modal-auth">
         <div class="modal-content">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" style="width: 40px; margin-bottom: 10px;">
-            <h2 style="font-size: 20px;">Вхід через Google</h2>
-            <p style="color: #666; font-size: 14px;">Введіть ваші дані для Astral Client</p>
-            
-            <div class="input-group">
-                <label>Ваше ім'я</label>
-                <input type="text" id="input-name" placeholder="Як вас звати?">
-            </div>
-            <div class="input-group">
-                <label>Електронна пошта</label>
-                <input type="email" id="input-email" placeholder="example@gmail.com">
-            </div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" style="width: 40px;">
+            <h2 style="margin: 15px 0;">Реєстрація</h2>
+            <input type="text" id="reg-name" placeholder="Ваше ім'я" class="input-field">
+            <input type="email" id="reg-email" placeholder="Ваш Gmail" class="input-field">
+            <button class="primary-btn" onclick="sendCode()">Отримати код</button>
+        </div>
+    </div>
 
-            <button class="social-btn" onclick="processLogin()">Продовжити</button>
-            <button onclick="closeM('modal-auth')" style="margin-top: 15px; border: none; background: none; cursor: pointer; color: #888;">Скасувати</button>
+    <div class="modal" id="modal-code">
+        <div class="modal-content">
+            <h2>Підтвердження</h2>
+            <p style="font-size: 14px; color: #666;">Ми відправили код на вашу пошту (імітація: код 1234)</p>
+            <input type="text" id="verify-code" placeholder="Введіть 4 цифри" class="input-field" maxlength="4">
+            <button class="primary-btn" onclick="verifyAndLogin()">Підтвердити</button>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-profile">
+        <div class="modal-content profile-card-modal">
+            <h2 style="color: var(--accent);">Мій Профіль</h2>
+            <div style="margin: 20px 0; text-align: left; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                <p>Ім'я: <strong id="prof-name"></strong></p>
+                <p>Пошта: <span id="prof-email" style="opacity: 0.7;"></span></p>
+                <p style="margin-top: 15px;">Ваша роль: <span class="role-badge buyer">BUYER</span></p>
+            </div>
+            <button class="primary-btn" style="background: #ff4d6d;" onclick="logout()">Вийти з акаунта</button>
+            <button onclick="closeM('modal-profile')" style="margin-top:15px; background:none; border:none; color:gray; cursor:pointer;">Закрити</button>
         </div>
     </div>
 
@@ -147,31 +136,53 @@
         function openM(id) { document.getElementById(id).style.display = 'flex'; }
         function closeM(id) { document.getElementById(id).style.display = 'none'; }
 
-        function processLogin() {
-            const name = document.getElementById('input-name').value;
-            const email = document.getElementById('input-email').value;
-
-            if(name === "" || email === "") {
-                alert("Будь ласка, заповніть всі поля!");
-                return;
+        // Перевірка при завантаженні: чи є збережений юзер?
+        window.onload = function() {
+            const savedUser = localStorage.getItem('astral_user');
+            if(savedUser) {
+                applyLogin(JSON.parse(savedUser));
             }
+        };
 
-            // Ховаємо модалку та старі кнопки
+        function sendCode() {
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            if(!name || !email) return alert("Заповни всі поля!");
+            
             closeM('modal-auth');
-            document.getElementById('btn-login').style.display = 'none';
-            document.getElementById('link-disc').style.display = 'none';
-            document.getElementById('link-prof').style.display = 'inline-block';
-            
-            // Вставляємо введені дані в профіль
-            document.getElementById('p-name').innerText = name;
-            document.getElementById('p-email').innerText = email;
-            
-            showProfile();
+            openM('modal-code');
         }
 
-        function showProfile() {
-            document.getElementById('profile-box').style.display = 'block';
-            document.getElementById('info-area').scrollIntoView();
+        function verifyAndLogin() {
+            const code = document.getElementById('verify-code').value;
+            if(code === "1234") { // Наш секретний "код"
+                const userData = {
+                    name: document.getElementById('reg-name').value,
+                    email: document.getElementById('reg-email').value
+                };
+                
+                localStorage.setItem('astral_user', JSON.stringify(userData));
+                applyLogin(userData);
+                closeM('modal-code');
+                alert("Успішно зареєстровано!");
+            } else {
+                alert("Невірний код! Спробуй 1234");
+            }
+        }
+
+        function applyLogin(data) {
+            document.getElementById('btn-login').style.display = 'none';
+            document.getElementById('nav-disc').style.display = 'none';
+            document.getElementById('nav-prof').style.display = 'inline-block';
+            
+            // Заповнюємо дані в модалку профілю
+            document.getElementById('prof-name').innerText = data.name;
+            document.getElementById('prof-email').innerText = data.email;
+        }
+
+        function logout() {
+            localStorage.removeItem('astral_user');
+            location.reload(); // Перезавантаження очистить стан
         }
     </script>
 </body>
