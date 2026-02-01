@@ -48,12 +48,13 @@
 
         .hero p { color: rgba(255,255,255,0.5); font-size: 18px; margin-bottom: 35px; letter-spacing: 1px; }
 
+        /* Кнопки */
         .btn-group { display: flex; gap: 15px; }
         .btn {
             padding: 14px 40px; border-radius: 8px; text-decoration: none;
             font-weight: 700; font-size: 14px; text-transform: uppercase;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
+            cursor: pointer; display: inline-block;
         }
         .btn-primary { background: var(--accent); color: #000; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); border: none; }
         .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(0, 229, 255, 0.5); }
@@ -73,6 +74,7 @@
         }
         .price-card:hover { border-color: var(--accent); transform: translateY(-5px); background: rgba(0, 229, 255, 0.05); }
 
+        /* Блок ролей як на скріншоті */
         .info-container {
             max-width: 1100px; margin: 0 auto; background: var(--glass);
             border: 1px solid var(--border); border-radius: 25px; padding: 40px;
@@ -82,7 +84,7 @@
         .role-badge {
             display: inline-block; padding: 6px 14px; border-radius: 6px;
             font-weight: 800; font-size: 13px; margin-right: 15px; text-transform: uppercase;
-            min-width: 80px; text-align: center;
+            min-width: 90px; text-align: center;
         }
         .owner { background: #ff4d6d; color: white; }
         .buyer { background: #ffb703; color: black; }
@@ -91,9 +93,9 @@
 
         /* Авторизація */
         .auth-methods {
-            margin-top: 30px; display: flex; gap: 30px; align-items: center; justify-content: center;
+            margin-top: 30px; display: flex; gap: 40px; align-items: center; justify-content: center;
         }
-        .auth-item { color: white; text-decoration: none; font-size: 32px; transition: 0.3s; opacity: 0.6; }
+        .auth-item { color: white; text-decoration: none; font-size: 36px; transition: 0.3s; opacity: 0.6; }
         .auth-item:hover { opacity: 1; color: var(--accent); transform: scale(1.2); }
 
         footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.2); font-size: 12px; }
@@ -156,11 +158,11 @@
             
             <hr style="margin: 35px 0; border: 0; border-top: 1px solid var(--border);">
             
-            <p style="text-align: center; color: rgba(255,255,255,0.5); font-size: 13px; text-transform: uppercase; letter-spacing: 2px;">Швидка реєстрація через:</p>
+            <p style="text-align: center; color: rgba(255,255,255,0.5); font-size: 13px; text-transform: uppercase; letter-spacing: 2px;">РЕЄСТРАЦІЯ НОВОГО АКАУНТА:</p>
             <div class="auth-methods">
-                <a href="javascript:void(0)" onclick="startAuth('google')" class="auth-item" title="Google"><i class="fab fa-google"></i></a>
-                <a href="javascript:void(0)" onclick="startAuth('gmail')" class="auth-item" title="Gmail"><i class="fas fa-envelope"></i></a>
-                <a href="javascript:void(0)" onclick="startAuth('x')" class="auth-item" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                <a href="javascript:void(0)" onclick="openReg('google')" class="auth-item" title="Реєстрація Google"><i class="fab fa-google"></i></a>
+                <a href="javascript:void(0)" onclick="openReg('gmail')" class="auth-item" title="Реєстрація Gmail"><i class="fas fa-envelope"></i></a>
+                <a href="javascript:void(0)" onclick="openReg('x')" class="auth-item" title="Реєстрація X (Twitter)"><i class="fab fa-x-twitter"></i></a>
             </div>
 
             <p style="margin-top: 40px; font-size: 16px;">Технічна підтримка: <span class="tech-admin">𝘛𝘦𝘹.𝘈𝘥𝘮𝘪𝘯</span></p>
@@ -173,23 +175,22 @@
     </footer>
 
     <script>
-        function startAuth(service) {
+        function openReg(platform) {
             let url = '';
-            if (service === 'google' || service === 'gmail') {
-                url = 'https://accounts.google.com/signin/v2/identifier';
-            } else if (service === 'x') {
-                url = 'https://x.com/i/flow/login';
+            if (platform === 'google' || platform === 'gmail') {
+                // Пряме посилання на створення нового Google акаунта
+                url = 'https://accounts.google.com/signup';
+            } else if (platform === 'x') {
+                // Посилання на реєстрацію в X
+                url = 'https://x.com/i/flow/signup';
             }
             
-            // Відкриваємо вікно авторизації
-            const width = 500;
-            const height = 600;
+            const width = 600;
+            const height = 700;
             const left = (window.innerWidth / 2) - (width / 2);
             const top = (window.innerHeight / 2) - (height / 2);
             
-            window.open(url, 'authWindow', `width=${width},height=${height},top=${top},left=${left}`);
-            
-            console.log('Початок авторизації через ' + service);
+            window.open(url, 'regWindow', `width=${width},height=${height},top=${top},left=${left},scrollbars=yes`);
         }
     </script>
 
