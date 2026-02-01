@@ -6,7 +6,6 @@
     <title>Astral Client — Next Generation</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Основні стилі */
         :root {
             --accent: #00e5ff;
             --bg-dark: #0a0a0a;
@@ -15,220 +14,138 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-dark); color: white; overflow-x: hidden; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: white;
-            overflow-x: hidden;
-        }
-
-        /* Фонове відео/анімація */
         .video-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
             z-index: -1;
-            filter: brightness(0.4);
+            background: radial-gradient(circle at 50% 50%, #112233 0%, #050505 100%);
         }
 
-        /* Навігація */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 8%;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 25px 8%; position: fixed; width: 100%; z-index: 1000;
             background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
             backdrop-filter: blur(5px);
         }
 
         .logo { font-size: 22px; font-weight: 800; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; }
 
-        .nav-links a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--accent); }
-
-        /* Головний екран */
         .hero {
             height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
         }
 
         .hero h1 {
             font-size: clamp(50px, 10vw, 90px);
-            font-weight: 900;
-            letter-spacing: -2px;
-            margin-bottom: 10px;
+            font-weight: 900; letter-spacing: -2px;
             background: linear-gradient(to bottom, #fff 40%, var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
 
         .hero p { color: rgba(255,255,255,0.5); font-size: 18px; margin-bottom: 35px; letter-spacing: 1px; }
 
-        /* Кнопки */
         .btn-group { display: flex; gap: 15px; }
-
         .btn {
-            padding: 14px 40px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
+            padding: 14px 40px; border-radius: 8px; text-decoration: none;
+            font-weight: 700; font-size: 14px; text-transform: uppercase;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-transform: uppercase;
         }
-
         .btn-primary { background: var(--accent); color: #000; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); }
         .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 50px rgba(0, 229, 255, 0.5); }
-
         .btn-secondary { background: var(--glass); color: #fff; border: 1px solid var(--border); backdrop-filter: blur(5px); }
-        .btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: var(--accent); }
+        .btn-secondary:hover { border-color: var(--accent); background: rgba(255,255,255,0.1); }
 
-        /* Секція цін */
         .section-padding { padding: 100px 8%; text-align: center; }
 
         .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 50px auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px; max-width: 1200px; margin: 50px auto;
         }
 
         .price-card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 35px 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
+            background: var(--glass); border: 1px solid var(--border);
+            padding: 35px 20px; border-radius: 20px; backdrop-filter: blur(10px); transition: 0.3s;
         }
-
         .price-card:hover { border-color: var(--accent); transform: translateY(-5px); background: rgba(0, 229, 255, 0.05); }
-        .price-card h3 { color: var(--accent); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
-        .price-card .cost { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
-        .price-card .sub-cost { font-size: 14px; color: rgba(255,255,255,0.5); }
 
-        /* Блок ролей */
         .info-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: var(--glass);
-            border: 1px solid var(--border);
-            border-radius: 25px;
-            padding: 40px;
-            text-align: left;
-            backdrop-filter: blur(10px);
+            max-width: 1100px; margin: 0 auto; background: var(--glass);
+            border: 1px solid var(--border); border-radius: 25px; padding: 40px;
+            text-align: left; backdrop-filter: blur(10px);
         }
 
         .role-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 5px;
-            font-weight: 800;
-            font-size: 12px;
-            margin-right: 10px;
-            text-transform: uppercase;
+            display: inline-block; padding: 4px 12px; border-radius: 5px;
+            font-weight: 800; font-size: 12px; margin-right: 10px; text-transform: uppercase;
         }
         .owner { background: #ff4757; color: white; }
         .buyer { background: #ffa502; color: black; }
         .member { background: #57606f; color: white; }
         .tech-admin { color: var(--accent); font-weight: bold; font-style: italic; font-size: 18px; }
 
-        /* Секція контактів (Купити) */
-        .buy-section { padding: 80px 8%; display: flex; flex-direction: column; align-items: center; }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            width: 100%;
-            max-width: 1100px;
-            margin-top: 50px;
+        /* Стилі для блоку реєстрації */
+        .auth-methods {
+            margin-top: 30px; display: flex; gap: 20px; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px; border: 1px dashed var(--border);
         }
-
-        .card {
-            background: var(--glass);
-            border: 1px solid var(--border);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
-        }
-
-        .card:hover { border-color: var(--accent); background: rgba(0, 229, 255, 0.05); transform: translateY(-5px); }
-        .card i { font-size: 40px; color: var(--accent); margin-bottom: 20px; }
-        .card h3 { margin-bottom: 15px; font-size: 20px; }
-        .card p { color: rgba(255,255,255,0.6); font-size: 14px; margin-bottom: 25px; }
+        .auth-item { color: white; text-decoration: none; font-size: 24px; transition: 0.3s; opacity: 0.7; }
+        .auth-item:hover { opacity: 1; color: var(--accent); transform: translateY(-3px); }
 
         footer { padding: 40px; text-align: center; color: rgba(255,255,255,0.2); font-size: 12px; }
 
         @media (max-width: 768px) {
-            .grid, .pricing-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 50px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="video-bg" style="background: radial-gradient(circle at 50% 50%, #112233 0%, #050505 100%);"></div>
+    <div class="video-bg"></div>
 
     <nav>
         <div class="logo">ASTRAL</div>
         <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#buy">Purchase</a>
+            <a href="#">Головна</a>
+            <a href="#buy">Купити</a>
             <a href="https://discord.gg/nCB3WsvfME">Discord</a>
         </div>
     </nav>
 
     <section class="hero">
         <h1>ASTRAL CLIENT</h1>
-        <p>Dominating the game with precision and style.</p>
+        <p>Домінуйте в грі з точністю та стилем.</p>
         <div class="btn-group">
-            <a href="#buy" class="btn btn-primary">Download Now</a>
+            <a href="#buy" class="btn btn-primary">Завантажити зараз</a>
             <a href="https://discord.gg/nCB3WsvfME" class="btn btn-secondary">Discord</a>
         </div>
     </section>
 
     <section class="section-padding" id="buy">
-        <h2 style="font-size: 32px; letter-spacing: 2px; text-transform: uppercase;">Ціни клієнта</h2>
+        <h2 style="font-size: 32px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px;">Ціни клієнта</h2>
         <div class="pricing-grid">
             <div class="price-card">
-                <h3>30 Days</h3>
-                <div class="cost">299 ₽</div>
-                <div class="sub-cost">₴155 | $3.69</div>
+                <h3 style="color: var(--accent); margin-bottom: 15px;">30 Днів</h3>
+                <div style="font-size: 26px; font-weight: 800;">299 ₽</div>
+                <div style="color: rgba(255,255,255,0.5);">₴155 | $3.69</div>
             </div>
             <div class="price-card">
-                <h3>90 Days</h3>
-                <div class="cost">399 ₽</div>
-                <div class="sub-cost">₴207 | $4.95</div>
+                <h3 style="color: var(--accent); margin-bottom: 15px;">90 Днів</h3>
+                <div style="font-size: 26px; font-weight: 800;">399 ₽</div>
+                <div style="color: rgba(255,255,255,0.5);">₴207 | $4.95</div>
             </div>
             <div class="price-card">
-                <h3>1 Year</h3>
-                <div class="cost">449 ₽</div>
-                <div class="sub-cost">₴230 | $5.55</div>
+                <h3 style="color: var(--accent); margin-bottom: 15px;">1 Рік</h3>
+                <div style="font-size: 26px; font-weight: 800;">449 ₽</div>
+                <div style="color: rgba(255,255,255,0.5);">₴230 | $5.55</div>
             </div>
             <div class="price-card" style="border-color: var(--accent); box-shadow: 0 0 20px rgba(0,229,255,0.2);">
-                <h3 style="background: var(--accent); color: black; display: inline-block; padding: 2px 8px; border-radius: 4px;">Lifetime</h3>
-                <div class="cost" style="margin-top: 10px;">599 ₽</div>
-                <div class="sub-cost">₴311 | $7.40</div>
+                <h3 style="background: var(--accent); color: black; display: inline-block; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px;">Lifetime</h3>
+                <div style="font-size: 26px; font-weight: 800;">599 ₽</div>
+                <div style="color: rgba(255,255,255,0.5);">₴311 | $7.40</div>
             </div>
         </div>
 
@@ -239,40 +156,23 @@
                 <p><span class="role-badge buyer">Buyer</span> — Видається автоматично при покупці клієнта.</p>
                 <p><span class="role-badge member">Member</span> — Учасник спільноти.</p>
             </div>
+            
             <hr style="margin: 30px 0; border: 0; border-top: 1px solid var(--border);">
-            <p style="font-size: 18px;">Технічна підтримка: <span class="tech-admin">𝘛𝘦𝘹.𝘈𝘥𝘮𝘪𝘯</span></p>
+            
+            <p style="text-align: center; color: rgba(255,255,255,0.6); margin-bottom: 15px;">Доступна швидка реєстрація через:</p>
+            <div class="auth-methods">
+                <a href="#" class="auth-item" title="Google"><i class="fab fa-google"></i></a>
+                <a href="#" class="auth-item" title="Gmail"><i class="fas fa-envelope"></i></a>
+                <a href="#" class="auth-item" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+            </div>
+
+            <p style="margin-top: 30px; text-align: center;">Технічна підтримка: <span class="tech-admin">𝘛𝘦𝘹.𝘈𝘥𝘮𝘪𝘯</span></p>
         </div>
     </section>
 
-    <section class="buy-section">
-        <h2 style="font-size: 32px; letter-spacing: 2px;">ОБЕРИ СПОСІБ ОПЛАТИ</h2>
-        <div class="grid">
-            <div class="card">
-                <i class="fab fa-discord"></i>
-                <h3>Discord</h3>
-                <p>Приєднуйся до нашої спільноти для підтримки та новин.</p>
-                <a href="https://discord.gg/nCB3WsvfME" class="btn btn-secondary" style="padding: 10px 20px;">Перейти</a>
-            </div>
-
-            <div class="card">
-                <i class="fab fa-telegram"></i>
-                <h3>Telegram</h3>
-                <p>Швидка покупка напряму через нашого менеджера.</p>
-                <a href="https://t.me/kopyy123" class="btn btn-secondary" style="padding: 10px 20px;">Написати</a>
-            </div>
-
-            <div class="card">
-                <i class="fas fa-shopping-cart"></i>
-                <h3>FunPay</h3>
-                <p>Купуй через перевірену торгову площадку з гарантією.</p>
-                <a href="https://funpay.com/users/12045083/" class="btn btn-secondary" style="padding: 10px 20px;">Купити</a>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        &copy; 2026 ASTRAL CLIENT. ALL RIGHTS RESERVED. <br>
-        NOT AN OFFICIAL MINECRAFT PRODUCT.
+    <footer style="margin-top: 50px;">
+        &copy; 2026 ASTRAL CLIENT. ВСІ ПРАВА ЗАХИЩЕНІ. <br>
+        НЕ Є ОФІЦІЙНИМ ПРОДУКТОМ MINECRAFT.
     </footer>
 
 </body>
