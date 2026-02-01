@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astral Client — Next Generation</title>
+    <title>Astral Client — Official</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -16,7 +17,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         body { background-color: var(--bg-dark); color: white; overflow-x: hidden; }
 
-        /* Фонове відео/градієнт */
+        /* Фон */
         .video-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at 50% 50%, #112233 0%, #050505 100%);
@@ -29,10 +30,9 @@
         }
         .logo { font-size: 24px; font-weight: 900; color: var(--accent); letter-spacing: 2px; }
         .nav-right { display: flex; align-items: center; gap: 25px; }
-        .nav-links a { text-decoration: none; color: rgba(255,255,255,0.7); font-size: 14px; font-weight: 600; margin-left: 20px; transition: 0.3s; cursor: pointer; }
-        .nav-links a:hover { color: var(--accent); }
         
         .auth-btn { background: var(--accent); color: black !important; padding: 10px 22px; border-radius: 6px; font-weight: 800; cursor: pointer; border: none; font-size: 12px; }
+        .user-avatar-nav { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent); cursor: pointer; display: none; }
 
         .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .btn-buy-main {
@@ -42,23 +42,18 @@
             box-shadow: 0 0 30px rgba(0, 229, 255, 0.4); border: none; cursor: pointer;
         }
 
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; max-width: 1200px; margin: 40px auto; padding: 0 8%; }
-        .price-card { background: var(--glass); border: 1px solid var(--border); padding: 40px 25px; border-radius: 20px; text-align: center; }
-
+        /* Модалки */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
         .modal-content { background: white; color: black; width: 400px; padding: 40px; border-radius: 16px; text-align: center; position: relative; }
         
-        /* Стилі ролей */
-        .role-badge { display: inline-block; padding: 6px 16px; border-radius: 6px; font-weight: 800; font-size: 12px; text-transform: uppercase; min-width: 100px; text-align: center; }
-        .owner { background: #ff4d6d; color: white; }
+        /* Профіль */
+        .profile-card-modal { background: #0c0d10 !important; color: white !important; border: 1px solid #333; }
+        .role-badge { display: inline-block; padding: 6px 16px; border-radius: 6px; font-weight: 900; font-size: 11px; text-transform: uppercase; margin-top: 10px; }
         .buyer { background: #ffb703; color: black; }
+        .avatar-big { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--accent); margin-bottom: 15px; }
 
-        .input-field { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
-        .primary-btn { width: 100%; padding: 14px; background: #4285F4; color: white; border: none; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 10px; }
-        
-        /* Картка профілю (темна) */
-        .profile-card-modal { background: #1a1a1a !important; color: white !important; }
-
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; max-width: 1200px; margin: 40px auto; padding: 0 8%; }
+        .price-card { background: var(--glass); border: 1px solid var(--border); padding: 40px 25px; border-radius: 20px; text-align: center; }
         .buy-link { display: block; padding: 15px; margin: 10px 0; background: #f0f0f0; border-radius: 8px; text-decoration: none; color: black; font-weight: 700; }
     </style>
 </head>
@@ -68,14 +63,9 @@
 
     <nav>
         <div class="logo">ASTRAL</div>
-        <div class="nav-right">
-            <div class="nav-links">
-                <a href="#">Головна</a>
-                <a href="#prices">Ціни</a>
-                <a href="https://discord.gg/nCB3WsvfME" id="nav-disc">Discord</a>
-                <a id="nav-prof" style="display:none;" onclick="openM('modal-profile')">Профіль</a>
-            </div>
-            <button class="auth-btn" id="btn-login" onclick="openM('modal-auth')">Вхід / Реєстрація</button>
+        <div class="nav-right" id="nav-controls">
+            <button class="auth-btn" id="btn-login-main" onclick="openM('modal-auth')">Вхід / Реєстрація</button>
+            <img id="user-nav-img" class="user-avatar-nav" onclick="openM('modal-profile')">
         </div>
     </nav>
 
@@ -85,10 +75,41 @@
     </section>
 
     <div class="pricing-grid" id="prices">
-        <div class="price-card"><h3>30 Днів</h3><div class="price-val">299 ₽</div><small>₴155 | $3.69</small></div>
-        <div class="price-card"><h3>90 Днів</h3><div class="price-val">399 ₽</div><small>₴207 | $4.95</small></div>
-        <div class="price-card"><h3>1 Рік</h3><div class="price-val">449 ₽</div><small>₴230 | $5.55</small></div>
-        <div class="price-card" style="border: 2px solid var(--accent);"><h3>Lifetime</h3><div class="price-val">599 ₽</div><small>₴311 | $7.40</small></div>
+        <div class="price-card"><h3>30 Днів</h3><div style="font-size: 24px; color: var(--accent);">299 ₽</div></div>
+        <div class="price-card" style="border: 2px solid var(--accent);"><h3>Lifetime</h3><div style="font-size: 24px; color: var(--accent);">599 ₽</div></div>
+    </div>
+
+    <div class="modal" id="modal-auth">
+        <div class="modal-content">
+            <h2 style="margin-bottom: 20px;">Авторизація</h2>
+            <p style="margin-bottom: 25px; color: #666;">Увійдіть через Google для верифікації акаунта</p>
+            
+            <div id="g_id_onload"
+                 data-client_id="1061283963090-h2g2mi3sf4j7s9fcf1hf5jt9b9rko8su.apps.googleusercontent.com"
+                 data-callback="handleCredentialResponse">
+            </div>
+            <div class="g_id_signin" data-type="standard"></div>
+
+            <button onclick="closeM('modal-auth')" style="margin-top: 20px; border: none; background: none; color: gray; cursor: pointer;">Скасувати</button>
+        </div>
+    </div>
+
+    <div class="modal" id="modal-profile">
+        <div class="modal-content profile-card-modal">
+            <img id="p-img" src="" class="avatar-big">
+            <h2 id="p-name">Користувач</h2>
+            <p id="p-email" style="opacity: 0.6; font-size: 13px;"></p>
+            
+            <div class="role-badge buyer">BUYER</div>
+            
+            <div style="margin-top: 25px; text-align: left; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                <p>🔑 Доступ: <span style="color: var(--accent);">Lifetime</span></p>
+                <p>📡 Статус: <span style="color: var(--accent);">Активовано</span></p>
+            </div>
+
+            <button class="auth-btn" style="width: 100%; margin-top: 20px; background: #ff4d6d !important; color: white !important;" onclick="logout()">Вийти</button>
+            <p onclick="closeM('modal-profile')" style="margin-top: 15px; cursor: pointer; opacity: 0.5; font-size: 12px;">Закрити</p>
+        </div>
     </div>
 
     <div class="modal" id="modal-buy">
@@ -96,39 +117,7 @@
             <h2>Оплатити доступ</h2>
             <a href="https://funpay.com/users/12045083/" target="_blank" class="buy-link">FunPay</a>
             <a href="https://t.me/Kopyy123" target="_blank" class="buy-link">Telegram (@Kopyy123)</a>
-            <button onclick="closeM('modal-buy')">Закрити</button>
-        </div>
-    </div>
-
-    <div class="modal" id="modal-auth">
-        <div class="modal-content">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" style="width: 40px;">
-            <h2 style="margin: 15px 0;">Реєстрація</h2>
-            <input type="text" id="reg-name" placeholder="Ваше ім'я" class="input-field">
-            <input type="email" id="reg-email" placeholder="Ваш Gmail" class="input-field">
-            <button class="primary-btn" onclick="sendCode()">Отримати код</button>
-        </div>
-    </div>
-
-    <div class="modal" id="modal-code">
-        <div class="modal-content">
-            <h2>Підтвердження</h2>
-            <p style="font-size: 14px; color: #666;">Ми відправили код на вашу пошту (імітація: код 1234)</p>
-            <input type="text" id="verify-code" placeholder="Введіть 4 цифри" class="input-field" maxlength="4">
-            <button class="primary-btn" onclick="verifyAndLogin()">Підтвердити</button>
-        </div>
-    </div>
-
-    <div class="modal" id="modal-profile">
-        <div class="modal-content profile-card-modal">
-            <h2 style="color: var(--accent);">Мій Профіль</h2>
-            <div style="margin: 20px 0; text-align: left; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px;">
-                <p>Ім'я: <strong id="prof-name"></strong></p>
-                <p>Пошта: <span id="prof-email" style="opacity: 0.7;"></span></p>
-                <p style="margin-top: 15px;">Ваша роль: <span class="role-badge buyer">BUYER</span></p>
-            </div>
-            <button class="primary-btn" style="background: #ff4d6d;" onclick="logout()">Вийти з акаунта</button>
-            <button onclick="closeM('modal-profile')" style="margin-top:15px; background:none; border:none; color:gray; cursor:pointer;">Закрити</button>
+            <button onclick="closeM('modal-buy')" style="border: none; background: none; margin-top: 10px; cursor: pointer;">Назад</button>
         </div>
     </div>
 
@@ -136,54 +125,46 @@
         function openM(id) { document.getElementById(id).style.display = 'flex'; }
         function closeM(id) { document.getElementById(id).style.display = 'none'; }
 
-        // Перевірка при завантаженні: чи є збережений юзер?
-        window.onload = function() {
-            const savedUser = localStorage.getItem('astral_user');
-            if(savedUser) {
-                applyLogin(JSON.parse(savedUser));
-            }
-        };
-
-        function sendCode() {
-            const name = document.getElementById('reg-name').value;
-            const email = document.getElementById('reg-email').value;
-            if(!name || !email) return alert("Заповни всі поля!");
+        // Функція, яка спрацьовує ПІСЛЯ входу через Google
+        function handleCredentialResponse(response) {
+            const data = JSON.parse(atob(response.credential.split('.')[1]));
             
+            const user = {
+                name: data.name,
+                email: data.email,
+                picture: data.picture
+            };
+
+            localStorage.setItem('astral_session', JSON.stringify(user));
+            applyUser(user);
             closeM('modal-auth');
-            openM('modal-code');
         }
 
-        function verifyAndLogin() {
-            const code = document.getElementById('verify-code').value;
-            if(code === "1234") { // Наш секретний "код"
-                const userData = {
-                    name: document.getElementById('reg-name').value,
-                    email: document.getElementById('reg-email').value
-                };
-                
-                localStorage.setItem('astral_user', JSON.stringify(userData));
-                applyLogin(userData);
-                closeM('modal-code');
-                alert("Успішно зареєстровано!");
-            } else {
-                alert("Невірний код! Спробуй 1234");
-            }
-        }
+        function applyUser(user) {
+            // Ховаємо кнопку входу, показуємо аватарку
+            document.getElementById('btn-login-main').style.display = 'none';
+            const navImg = document.getElementById('user-nav-img');
+            navImg.src = user.picture;
+            navImg.style.display = 'block';
 
-        function applyLogin(data) {
-            document.getElementById('btn-login').style.display = 'none';
-            document.getElementById('nav-disc').style.display = 'none';
-            document.getElementById('nav-prof').style.display = 'inline-block';
-            
-            // Заповнюємо дані в модалку профілю
-            document.getElementById('prof-name').innerText = data.name;
-            document.getElementById('prof-email').innerText = data.email;
+            // Заповнюємо дані в профілі
+            document.getElementById('p-name').innerText = user.name;
+            document.getElementById('p-email').innerText = user.email;
+            document.getElementById('p-img').src = user.picture;
         }
 
         function logout() {
-            localStorage.removeItem('astral_user');
-            location.reload(); // Перезавантаження очистить стан
+            localStorage.removeItem('astral_session');
+            location.reload();
         }
+
+        // Перевірка при завантаженні сторінки
+        window.onload = function() {
+            const saved = localStorage.getItem('astral_session');
+            if (saved) {
+                applyUser(JSON.parse(saved));
+            }
+        };
     </script>
 </body>
 </html>
